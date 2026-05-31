@@ -14,6 +14,7 @@ import os
 import numpy as np
 
 from . import io_util, io_wav
+from . import space
 from . import analyze as A
 from . import plan as P
 from . import process as PROC
@@ -112,7 +113,8 @@ def process_to_pre(input_path, profile, *, denoise=False, primary=None,
         pre = pre.astype(np.float32)
         orig_ref = data[:, analysis.primary_index]
     if reverb is not None or ir:
-        pre = PROC.apply_reverb(pre, sr, amount=(reverb if reverb is not None else 0.2), ir_path=ir)
+        ir_path = space.resolve_ir(ir) if ir else None
+        pre = PROC.apply_reverb(pre, sr, amount=(reverb if reverb is not None else 0.2), ir_path=ir_path)
     return {"pre": pre, "orig_ref": orig_ref, "analysis": analysis, "plan": plan,
             "wi": wi, "sr": sr, "mode": mode, "cleaned": cleaned, "profile": profile,
             "data": data}

@@ -23,17 +23,19 @@ dependencies = [
 
 [project.optional-dependencies]
 match = ["matchering"]
-debleed = ["demucs", "torch"]
+debleed = ["demucs", "torch", "torchaudio"]
+gui = ["tkinterdnd2"]
 dev = ["pytest"]
 
 [project.scripts]
 fides = "fides.cli:main"
+fides-gui = "fides.gui:main"
 
 [tool.setuptools]
 packages = ["fides"]
 
 [tool.setuptools.package-data]
-fides = ["profiles/*.json"]
+fides = ["profiles/*.json", "ir/*.wav"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

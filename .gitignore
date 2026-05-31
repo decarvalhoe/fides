@@ -18,6 +18,9 @@ out/
 *.aif
 *.aiff
 
+# Exception : IR presets bundlés dans le package
+!fides/ir/*.wav
+
 # OS / éditeurs
 .DS_Store
 Thumbs.db

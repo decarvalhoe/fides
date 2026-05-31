@@ -1,5 +1,9 @@
 # Fides
 
+[![CI](https://github.com/decarvalhoe/fides/actions/workflows/ci.yml/badge.svg)](https://github.com/decarvalhoe/fides/actions/workflows/ci.yml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+![Python ≥3.9](https://img.shields.io/badge/python-%E2%89%A53.9-blue)
+
 Auto‑mastering **transparent** pour **violon solo et petites formations classiques**
 (quatuor à cordes, musique de chambre). Le logiciel analyse l'enregistrement, décide
 une chaîne de traitement minimale et soustractive, l'applique, puis **prouve** sa
@@ -10,6 +14,8 @@ meilleures pratiques studio sans dénaturer le son original.*
 > **pedalboard** (DSP) · **pyloudnorm**/**ffmpeg‑normalize** (loudness EBU R128) ·
 > **matchering** (matching sur référence, optionnel) · IR de vraies salles **OpenAIR**.
 > Runtime : **WSL2 / Ubuntu** (Linux‑first ; GPU NVIDIA dispo mais non requis).
+
+![Original vs master (REC_0001) — spectres superposés (transparent) + EQ doux plafonné](assets/spectrum.png)
 
 ## Philosophie « ne pas dénaturer »
 
@@ -71,7 +77,7 @@ python -m fides.cli IN.wav -o OUT/ \
     --limit \                    # limiteur doux pour atteindre la cible (sinon gain linéaire)
     --ebu \                      # loudness via ffmpeg-normalize EBU R128 (peut compresser)
     --reference REF.wav \        # matching sur une référence (matchering)
-    --reverb 0.2 \               # réverbe d'espace subtile (ou --ir IR.wav pour convolution)
+    --reverb 0.2 \               # réverbe d'espace (ou --ir hall|room|chamber, ou un chemin WAV)
     --deharsh --glue \           # de-harsh dynamique d'archet ; léger glue compressor
     --blend 5 --blend-gain -6 \  # multipiste : ajoute le canal 5 (ambiance) au master
     --no-stems
@@ -88,6 +94,8 @@ pip install -e . && fides IN.wav -o OUT/        # commande `fides` après instal
 fides IN.wav -o OUT/ --full                      # -> full_processed.wav (tous les canaux, float)
 fides IN.wav -o OUT/ --bit-depth 32f             # master/stems en 32-bit float (sans perte)
 ```
+
+**Interface graphique** (glisser‑déposer) : `fides-gui` — nécessite tkinter (Linux : `apt install python3-tk`) ; `pip install -e ".[gui]"` active le drag‑drop.
 
 ### Sorties (`OUT/`)
 

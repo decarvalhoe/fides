@@ -25,7 +25,8 @@ def main(argv=None) -> int:
     ap.add_argument("--glue", action="store_true", help="compresseur doux program-dependent (off par défaut)")
     ap.add_argument("--reverb", nargs="?", type=float, const=0.2, default=None,
                     metavar="AMOUNT", help="réverbe d'espace 0..1 (défaut 0.2 si flag nu)")
-    ap.add_argument("--ir", default=None, help="IR de convolution (WAV) pour la réverbe")
+    ap.add_argument("--ir", default=None,
+                    help="IR de convolution : preset (hall/room/chamber) ou chemin WAV")
     ap.add_argument("--dry-run", action="store_true", help="analyse + plan seulement (pas de rendu)")
     ap.add_argument("--batch", action="store_true", help="traiter un DOSSIER de prises (input = dossier)")
     ap.add_argument("--no-album", action="store_true", help="désactive la normalisation album/anchor en batch")

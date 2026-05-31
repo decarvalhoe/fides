@@ -9,13 +9,15 @@ Toutes les modifications notables de Fides.
 - **Robustesse** : entrées multi-formats (soundfile + repli ffmpeg M4A/AAC),
   gestion mono/stéréo/multipiste (master stéréo si entrée stéréo), erreurs FR
   claires + exit codes, logging `-v/-q`, garde-fous NaN/court/silence, `--dry-run`.
-- **Qualité audio** : réverbe d'espace (`--reverb`/`--ir`), de-harsh dynamique
-  d'archet (`--deharsh`), déclip cubique, glue compressor (`--glue`).
+- **Qualité audio** : réverbe d'espace (`--reverb` algorithmique ou `--ir hall|room|chamber`
+  presets bundlés / IR perso), de-harsh dynamique d'archet (`--deharsh`), déclip cubique,
+  glue compressor (`--glue`).
 - **Workflow** : mode batch (`--batch`) + normalisation album/anchor (EBU R128 s2),
   A/B aligné en loudness (`original_match.wav`), rapports HTML + MD + JSON.
 - **Ensembles** : blend multi-micros (`--blend`), de-bleed Demucs expérimental (`--debleed`).
-- **Packaging** : `pyproject.toml`, entry point `fides`, CI GitHub Actions, profils embarqués.
-- **Doc** : README, GUIDE (prise de son), ROADMAP, ISSUES, RESEARCH.
+- **Interface graphique** : `fides-gui` (tkinter, glisser‑déposer avec l'extra `gui`).
+- **Packaging** : `pyproject.toml`, entry points `fides` + `fides-gui`, CI GitHub Actions, profils + IR embarqués.
+- **Doc** : README (badges + capture spectrale `assets/spectrum.png`), GUIDE, ROADMAP, ISSUES, RESEARCH.
 
 ## [0.1.0] — 2026-05-31
 ### Ajouté
