@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fides-mastering"
-version = "0.2.2"
+version = "0.2.3"
 description = "Auto-mastering transparent pour cordes classiques (violon solo, petites formations)"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -39,7 +39,8 @@ dependencies = [
 match = ["matchering"]
 debleed = ["demucs", "torch", "torchaudio"]
 gui = ["tkinterdnd2"]
-dev = ["pytest", "build", "twine"]
+viz = ["matplotlib"]
+dev = ["pytest", "build", "twine", "matplotlib", "ruff"]
 
 [project.urls]
 Homepage = "https://github.com/decarvalhoe/fides"
@@ -61,3 +62,11 @@ fides = ["profiles/*.json", "ir/*.wav"]
 [tool.pytest.ini_options]
 addopts = "-q"
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]   # lignes longues tolérées (gabarits HTML, lignes ttk)

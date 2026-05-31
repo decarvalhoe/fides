@@ -8,7 +8,7 @@ Dépend uniquement de numpy + scipy (testable sans le reste de la pile).
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 from typing import Optional
 
 import numpy as np

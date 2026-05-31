@@ -2,6 +2,15 @@
 
 Toutes les modifications notables de Fides.
 
+## [0.2.3] — 2026-05-31
+### Ajouté
+- **Preuve visuelle par run** : chaque `report.html` embarque son graphe
+  « spectres superposés + courbe de différence (EQ plafonné) » (`report_spectrum.png`,
+  via `fides/visualize.py`, matplotlib best-effort).
+- **Lint ruff** (E/F/W/I) + job CI dédié ; extra `viz` (matplotlib).
+### Corrigé
+- Titres des rapports MD/HTML (« DLZ » → « Fides ») ; 5 `E702` et ordre des imports.
+
 ## [0.2.2] — 2026-05-31
 ### Ajouté
 - **Publication PyPI automatisée** : workflow `publish.yml` (GitHub Action,

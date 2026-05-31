@@ -7,8 +7,8 @@ gain linéaire plafonné true-peak (dynamique préservée) — gère mono et st�
 from __future__ import annotations
 
 import numpy as np
-from scipy import signal
 import pedalboard as pb
+from scipy import signal
 
 EPS = 1e-12
 
@@ -41,10 +41,12 @@ def _declip(x: np.ndarray, thr: float = 0.999):
         xs, ys = [], []
         for off in (-2, -1):
             if a + off >= 0:
-                xs.append(a + off); ys.append(y[a + off])
+                xs.append(a + off)
+                ys.append(y[a + off])
         for off in (1, 2):
             if b + off < n:
-                xs.append(b + off); ys.append(y[b + off])
+                xs.append(b + off)
+                ys.append(y[b + off])
         if len(xs) < 2:
             continue
         deg = 3 if len(xs) >= 4 else 1
@@ -90,7 +92,8 @@ def _deharsh_dynamic(x: np.ndarray, sr: int, freq=3200.0, q=1.2,
     """
     x = x.astype(np.float64)
     lo, hi = freq / (2 ** (1 / (2 * q))), freq * (2 ** (1 / (2 * q)))
-    lo = max(20.0, lo); hi = min(sr / 2 * 0.95, hi)
+    lo = max(20.0, lo)
+    hi = min(sr / 2 * 0.95, hi)
     sos = signal.butter(2, [lo, hi], btype="band", fs=sr, output="sos")
     band = signal.sosfilt(sos, x)
     # enveloppe lissée de la bande

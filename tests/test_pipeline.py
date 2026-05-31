@@ -3,7 +3,7 @@ import os
 import numpy as np
 import soundfile as sf
 
-from fides import pipeline, batch, io_wav
+from fides import batch, io_wav, pipeline
 
 
 def _tone(n, sr=48000, f=440, amp=0.2):

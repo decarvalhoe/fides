@@ -19,9 +19,9 @@ def isolate(input_path: str, outdir: str, model: str = "htdemucs", stem: str = "
     """Sépare via Demucs et écrit le stem choisi en WAV ; retourne son chemin."""
     try:
         import torch
-        from demucs.pretrained import get_model
         from demucs.apply import apply_model
         from demucs.audio import AudioFile
+        from demucs.pretrained import get_model
     except Exception as e:  # torch/demucs absents ou API changée
         raise RuntimeError(f"Demucs/torch indisponibles (palier 2 requis) : {e}")
 

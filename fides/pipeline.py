@@ -13,14 +13,13 @@ import os
 
 import numpy as np
 
-from . import io_util, io_wav
-from . import space
 from . import analyze as A
+from . import io_util, io_wav, space
 from . import plan as P
 from . import process as PROC
 from . import reference as REF
-from . import verify as V
 from . import report as R
+from . import verify as V
 
 logger = logging.getLogger("dlz")
 
@@ -185,6 +184,17 @@ def finalize(ctx, outdir, target_lufs, tp_ceiling, *, album_gain=None,
         full_path = os.path.join(outdir, "full_processed.wav")
         io_wav.write_wav(full_path, full_arr, sr, subtype)
         outputs["full_processed"] = full_path
+
+    # Preuve visuelle par run : spectre original vs master (best-effort, matplotlib)
+    try:
+        from . import visualize as VIZ
+        sp = VIZ.spectrum_figure(orig_ref, master_data[:, 0], sr,
+                                 os.path.join(outdir, "report_spectrum.png"),
+                                 title=f"Fides — {os.path.basename(wi.path)}")
+        if sp:
+            outputs["report_spectrum"] = sp
+    except Exception:
+        pass
 
     rep = R.build_report(wi, analysis, plan, before, after,
                          {**nt, "residual": None}, outputs, ctx["profile"], used_reference, lmeta)

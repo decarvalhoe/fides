@@ -60,7 +60,7 @@ def write_md(report: dict, path: str) -> str:
     plan = report["plan"]
     lm = report["measures"].get("loudness")
     L = []
-    L.append(f"# Rapport de mastering DLZ — `{os.path.basename(s['input'])}`\n")
+    L.append(f"# Rapport de mastering Fides —`{os.path.basename(s['input'])}`\n")
     L.append(f"- **Format** : {s['format']} · durée {s['duration_s']} s"
              + (" · ⚠️ en-tête tronqué (réparé à la lecture)" if s["truncated_header"] else ""))
     L.append(f"- **Profil** : {s['profile']}")
@@ -135,8 +135,12 @@ def write_html(report: dict, path: str) -> str:
 
     chain = "".join(f"<li><b>ch{c}</b> : {' · '.join(pc['steps'])}</li>"
                     for c, pc in plan["channels"].items())
+    _spec = s["outputs"].get("report_spectrum")
+    spec_html = (f'<h2>Preuve — spectre original vs master</h2>'
+                 f'<img src="{os.path.basename(_spec)}" alt="spectre original vs master Fides" '
+                 f'style="width:100%;border:1px solid #e3e3e3;border-radius:4px">') if _spec else ""
     html = f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
-<title>DLZ — {os.path.basename(s['input'])}</title>
+<title>Fides —{os.path.basename(s['input'])}</title>
 <style>
  body{{font:15px/1.5 system-ui,Segoe UI,Arial;margin:2rem auto;max-width:880px;color:#1a1a1a}}
  h1{{font-size:1.4rem}} h2{{font-size:1.05rem;margin-top:1.6rem;border-bottom:1px solid #eee;padding-bottom:.2rem}}
@@ -145,7 +149,7 @@ def write_html(report: dict, path: str) -> str:
  .ok{{color:#127a2b}} .warn{{color:#b25e00}} code{{background:#f5f5f5;padding:1px 4px;border-radius:3px}}
  .muted{{color:#666}}
 </style></head><body>
-<h1>Rapport de mastering DLZ — <code>{os.path.basename(s['input'])}</code></h1>
+<h1>Rapport de mastering Fides —<code>{os.path.basename(s['input'])}</code></h1>
 <p class="muted">{s['format']} · {s['duration_s']} s · mode <b>{s.get('mode','?')}</b>
 {' · <span class="warn">en-tête tronqué (réparé)</span>' if s['truncated_header'] else ''}
 · profil <b>{s['profile']}</b> · primaire ch{s['primary_channel']}</p>
@@ -157,6 +161,7 @@ def write_html(report: dict, path: str) -> str:
 <p>Gain {s.get('loudness_gain_db')} dB · mode {s.get('loudness_mode')} ·
 {'<span class="warn">plafonné true-peak (dynamique intacte)</span>' if s.get('tp_limited') else '<span class="ok">cible atteinte</span>'}</p>
 <p><b>Null-test</b> : résidu {s['null_residual_rel_db']} dB — <i>{s['null_interpretation']}</i></p>
+{spec_html}
 
 <h2>Canaux</h2>
 <table><tr><th>ch</th><th>rôle</th><th>peak</th><th>RMS</th><th>bruit</th><th>DR</th><th>clip</th><th>centroïde</th></tr>

@@ -8,6 +8,6 @@ try:
     try:
         __version__ = version("fides-mastering")
     except PackageNotFoundError:
-        __version__ = "0.2.2"
+        __version__ = "0.2.3"
 except Exception:  # pragma: no cover
-    __version__ = "0.2.2"
+    __version__ = "0.2.3"

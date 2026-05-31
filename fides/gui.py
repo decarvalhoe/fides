@@ -59,7 +59,7 @@ def process_files(files, outdir, opts, log):
 def build_ui(root, has_dnd=False):
     """Construit l'UI sur `root` et renvoie un dict d'état. Ne lance pas mainloop."""
     import tkinter as tk
-    from tkinter import filedialog, ttk, scrolledtext
+    from tkinter import filedialog, scrolledtext, ttk
 
     st = {"files": [], "log_q": queue.Queue()}
     root.title("Fides — auto‑mastering cordes")
@@ -133,11 +133,13 @@ def build_ui(root, has_dnd=False):
 
     def run():
         if not st["files"]:
-            st["log"]("Aucun fichier."); return
+            st["log"]("Aucun fichier.")
+            return
         try:
             tgt = float(st["lufs"].get()) if st["lufs"].get().strip() else None
         except ValueError:
-            st["log"]("Cible LUFS invalide."); return
+            st["log"]("Cible LUFS invalide.")
+            return
         opts = {"profile": st["prof"].get(), "reverb_mode": st["rev"].get(), "target_lufs": tgt,
                 "full": st["full"].get(), "denoise": st["denoise"].get(), "deharsh": st["deharsh"].get()}
         run_btn.config(state="disabled")

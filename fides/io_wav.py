@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import os
 import struct
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 
 import numpy as np
 import soundfile as sf
