@@ -1,6 +1,6 @@
 # Guide de prise de son — violon / petites formations
 
-Le traitement DLZ est **transparent** : il corrige et met au niveau, il ne *sauve* pas
+Le traitement Fides est **transparent** : il corrige et met au niveau, il ne *sauve* pas
 une mauvaise prise. La qualité du master dépend d'abord de la captation. Conseils
 concis pour des prises qui exploitent au mieux le pipeline.
 

@@ -7,7 +7,7 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, "/mnt/c/Dev/dlz-mastering")
-from dlz import pipeline, reference  # noqa: E402
+from fides import pipeline, reference  # noqa: E402
 
 np.random.seed(0)
 sr = 48000

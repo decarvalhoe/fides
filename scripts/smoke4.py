@@ -6,7 +6,7 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, "/mnt/c/Dev/dlz-mastering")
-from dlz import pipeline, io_wav  # noqa: E402
+from fides import pipeline, io_wav  # noqa: E402
 
 sr = 48000
 t = np.arange(int(2 * sr)) / sr
@@ -27,7 +27,7 @@ print("mode=", r0["summary"]["mode"], "primary=", r0["summary"]["primary_channel
 assert r0["summary"]["mode"] == "multitrack"
 assert diff > 1e-5, "le blend n'a eu aucun effet"
 
-from dlz import debleed  # noqa: E402
+from fides import debleed  # noqa: E402
 assert hasattr(debleed, "isolate")
 print("debleed import OK")
 print("BLEND_OK")

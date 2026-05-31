@@ -1,11 +1,11 @@
-# Issues — DLZ Mastering
+# Issues — Fides
 
 Backlog pour un outil **robuste, simple, pro, sans service payant**.
 Priorités : **P0** bloquant · **P1** important · **P2** confort. Labels entre `[ ]`.
 
 ## v0.2 — Robustesse
 
-- **#1 [robustesse][P0]** Entrées multi-formats. FLAC/AIFF/OGG natifs (soundfile) ; MP3/M4A/MP4/autres via décodage **ffmpeg** vers WAV temporaire. *AC : `dlz IN.flac` et `IN.mp3` aboutissent.*
+- **#1 [robustesse][P0]** Entrées multi-formats. FLAC/AIFF/OGG natifs (soundfile) ; MP3/M4A/MP4/autres via décodage **ffmpeg** vers WAV temporaire. *AC : `fides IN.flac` et `IN.mp3` aboutissent.*
 - **#2 [robustesse][P0]** Tout nombre de canaux : mono, stéréo, N. Pas de dé-duplication absurde en mono ; stéréo géré (paires). *AC : mono & stéréo & 14ch OK.*
 - **#3 [robustesse][P0]** Validation & erreurs claires (fichier absent, format illisible, profil inconnu, aucun canal actif, sortie non inscriptible) — message FR, exit≠0, pas de traceback.
 - **#4 [robustesse][P1]** Logging structuré (`--verbose`/`--quiet`) ; warnings ffmpeg/libs silencieux par défaut.
@@ -21,11 +21,11 @@ Priorités : **P0** bloquant · **P1** important · **P2** confort. Labels entre
 
 ## v0.4 — Workflow pro
 
-- **#11 [workflow][P1]** Mode **batch** : `dlz batch DIR -o OUT` traite toutes les prises d'un dossier avec réglages cohérents.
+- **#11 [workflow][P1]** Mode **batch** : `fides batch DIR -o OUT` traite toutes les prises d'un dossier avec réglages cohérents.
 - **#12 [workflow][P1]** Normalisation **album/anchor** (EBU R128 s2) : gain commun calculé sur l'ensemble du lot (ancre = mouvement le plus fort).
 - **#13 [workflow][P2]** Export A/B **aligné en loudness** : `original_match.wav` au même LUFS que le master (comparaison juste).
 - **#14 [workflow][P2]** Rapport **HTML** autonome (en plus de MD/JSON).
-- **#15 [pro][P1]** Packaging : `pyproject.toml` + entry point console `dlz` (`pip install -e .`).
+- **#15 [pro][P1]** Packaging : `pyproject.toml` + entry point console `fides` (`pip install -e .`).
 
 ## v0.5 — Ensembles (palier 2)
 

@@ -9,10 +9,10 @@ test:
 	python -m pytest
 
 run:
-	python -m dlz.cli "$(IN)" -o "$(OUT)" -p $(P)
+	python -m fides.cli "$(IN)" -o "$(OUT)" -p $(P)
 
 batch:
-	python -m dlz.cli "$(IN)" -o "$(OUT)" -p $(P) --batch
+	python -m fides.cli "$(IN)" -o "$(OUT)" -p $(P) --batch
 
 clean:
 	rm -rf __pycache__ */__pycache__ */*/__pycache__ .pytest_cache *.egg-info build dist

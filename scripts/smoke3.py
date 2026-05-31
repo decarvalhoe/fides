@@ -6,7 +6,7 @@ import numpy as np
 import soundfile as sf
 
 sys.path.insert(0, "/mnt/c/Dev/dlz-mastering")
-from dlz import batch  # noqa: E402
+from fides import batch  # noqa: E402
 
 sr = 48000
 t = np.arange(int(2 * sr)) / sr

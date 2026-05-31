@@ -35,7 +35,7 @@ Oriente la **pile hybride** du projet : cœur open‑source/local + matching + (
 - Plateformes grand public : normalisent à **~‑14** (Spotify/YouTube) / **~‑16/‑14** (Apple/TIDAL).
   → Bonne pratique classique : **préserver la dynamique** à la cible de la plateforme plutôt que
   pousser le niveau. Pour les œuvres à mouvements : **normalisation album/anchor** (ancre = mouvement le plus fort).
-- Choix d'implémentation DLZ : **gain linéaire plafonné true‑peak** (LRA intacte) par défaut ;
+- Choix d'implémentation Fides : **gain linéaire plafonné true‑peak** (LRA intacte) par défaut ;
   `--limit`/`--ebu` disponibles si l'on accepte un compromis de dynamique.
 
 ## Caveats licences
@@ -52,7 +52,7 @@ Oriente la **pile hybride** du projet : cœur open‑source/local + matching + (
   dxRevive/SpectralBalance** (se revendiquent *musique* → à vérifier en priorité), Acon, Waves
   Clarity Vx, Supertone, CEDAR, Bertom, NVIDIA. Sonible (smart:EQ/smart:limit) non couvert.
 - **Aucune mesure indépendante de qualité audio sur cordes** n'existe pour aucun outil. Le seul
-  jugement fortement étayé est **négatif** (DeepFilterNet). → Le **null‑test/A‑B** du pipeline DLZ
+  jugement fortement étayé est **négatif** (DeepFilterNet). → Le **null‑test/A‑B** du pipeline Fides
   sert précisément à combler ce vide sur tes propres enregistrements.
 - À évaluer : un modèle de débruitage/déréverbération entraîné **sur musique** (non‑voix),
   scriptable en Python.

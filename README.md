@@ -1,4 +1,4 @@
-# DLZ Mastering
+# Fides
 
 Auto‑mastering **transparent** pour **violon solo et petites formations classiques**
 (quatuor à cordes, musique de chambre). Le logiciel analyse l'enregistrement, décide
@@ -32,38 +32,39 @@ Ingest/Repair → Analyze → Plan → Process → Verify → Output
 
 | Module | Rôle |
 |---|---|
-| `dlz/io_wav.py` | Lecture multicanal 24‑bit robuste (fichiers à en‑tête **tronqué**), repair RIFF, écriture |
-| `dlz/io_util.py` | Chargement multi‑formats (soundfile + repli **ffmpeg** pour M4A/AAC…) |
-| `dlz/analyze.py` | Stats/canal, classification (actif/silence/**duplicata**), bruit, **clip**, hum 50 Hz, tonal |
-| `dlz/plan.py` | Décide la chaîne + paramètres (plafonnés) depuis l'analyse + profil |
-| `dlz/process.py` | DC, déclip, de‑hum (notch), débruitage doux (opt‑in), EQ (pedalboard), loudness |
-| `dlz/reference.py` | Profils JSON + matching sur référence (matchering, optionnel) |
-| `dlz/verify.py` | Mesures LUFS/true‑peak (pyloudnorm) + **null‑test** |
-| `dlz/report.py` | Rapport JSON + Markdown |
-| `dlz/batch.py` | Traitement par lot + normalisation **album/anchor** (EBU R128 s2) |
-| `dlz/debleed.py` | De‑bleed **expérimental** via Demucs (palier 2, ensembles) |
-| `dlz/pipeline.py` / `cli.py` | Orchestration + CLI |
+| `fides/io_wav.py` | Lecture multicanal 24‑bit robuste (fichiers à en‑tête **tronqué**), repair RIFF, écriture |
+| `fides/io_util.py` | Chargement multi‑formats (soundfile + repli **ffmpeg** pour M4A/AAC…) |
+| `fides/analyze.py` | Stats/canal, classification (actif/silence/**duplicata**), bruit, **clip**, hum 50 Hz, tonal |
+| `fides/plan.py` | Décide la chaîne + paramètres (plafonnés) depuis l'analyse + profil |
+| `fides/process.py` | DC, déclip, de‑hum (notch), débruitage doux (opt‑in), EQ (pedalboard), loudness |
+| `fides/reference.py` | Profils JSON + matching sur référence (matchering, optionnel) |
+| `fides/verify.py` | Mesures LUFS/true‑peak (pyloudnorm) + **null‑test** |
+| `fides/report.py` | Rapport JSON + Markdown |
+| `fides/batch.py` | Traitement par lot + normalisation **album/anchor** (EBU R128 s2) |
+| `fides/debleed.py` | De‑bleed **expérimental** via Demucs (palier 2, ensembles) |
+| `fides/pipeline.py` / `cli.py` | Orchestration + CLI |
 
-## Installation (WSL2 / Ubuntu)
+## Installation
+
+Pré‑requis : Python ≥ 3.9 et **ffmpeg** dans le PATH (Linux/WSL2 recommandé ; macOS OK).
 
 ```bash
-# depuis WSL (Ubuntu)
-bash /mnt/c/Dev/dlz-mastering/scripts/provision.sh   # crée ~/dlz/.venv + installe la pile
-source ~/dlz/.venv/bin/activate
+git clone https://github.com/decarvalhoe/fides.git
+cd fides
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[match]"        # + matchering ; ajoutez [debleed] pour Demucs (palier 2)
 ```
 
-Pré‑requis présents par défaut sous Ubuntu‑WSL : `python3`, `ffmpeg`. La pile Python
-(numpy, scipy, soundfile, pyloudnorm, pedalboard, noisereduce, ffmpeg‑normalize,
-matchering) est installée par `scripts/provision.sh` (sans sudo).
+Astuce WSL : `scripts/provision.sh` crée un venv et installe toute la pile sans sudo.
 
 ## Usage
 
 ```bash
 # traitement par défaut (transparent : pas de débruitage, loudness linéaire)
-python -m dlz.cli ~/dlz/in/REC_0001.wav -o ~/dlz/out/REC_0001 -p violin_solo
+fides IN.wav -o OUT/ -p violin_solo
 
 # options
-python -m dlz.cli IN.wav -o OUT/ \
+python -m fides.cli IN.wav -o OUT/ \
     -p string_quartet \          # profil
     -t -18 \                     # cible LUFS (sinon valeur du profil)
     --denoise \                  # active le débruitage doux (off par défaut)
@@ -76,16 +77,16 @@ python -m dlz.cli IN.wav -o OUT/ \
     --no-stems
 
 # mode batch (dossier de prises) + normalisation album/anchor
-python -m dlz.cli /chemin/prises -o OUT/ --batch -p string_quartet
+python -m fides.cli /chemin/prises -o OUT/ --batch -p string_quartet
 
 # dry-run (analyse + plan, sans rendu) · liste des profils · entry point packagé
-python -m dlz.cli IN.wav -o OUT/ --dry-run
-python -m dlz.cli --list-profiles
-pip install -e . && dlz IN.wav -o OUT/        # commande `dlz` après installation
+python -m fides.cli IN.wav -o OUT/ --dry-run
+python -m fides.cli --list-profiles
+pip install -e . && fides IN.wav -o OUT/        # commande `fides` après installation
 
 # format plein : session COMPLÈTE multicanal traitée, 32-bit float, SR d'origine
-dlz IN.wav -o OUT/ --full                      # -> full_processed.wav (tous les canaux, float)
-dlz IN.wav -o OUT/ --bit-depth 32f             # master/stems en 32-bit float (sans perte)
+fides IN.wav -o OUT/ --full                      # -> full_processed.wav (tous les canaux, float)
+fides IN.wav -o OUT/ --bit-depth 32f             # master/stems en 32-bit float (sans perte)
 ```
 
 ### Sorties (`OUT/`)
@@ -108,11 +109,12 @@ choisit **ch12**, copie propre 12 dB plus bas du même contenu. Override manuel 
 
 ## Limitations connues / feuille de route
 
-- Choix du primaire automatique (override `--primary N` disponible).
-- Réverbe à convolution (pedalboard.Convolution + IR OpenAIR) : **câblée mais non activée** par défaut.
-- Pas encore : normalisation **album/anchor** multi‑prises (EBU R128 s2), de‑esser dynamique
-  d'archet, hébergement de VST3 commerciaux (Windows‑side, cf. `RESEARCH.md`).
-- Le déclip est une interpolation simple (suffisant en secours ; pas un restaurateur dédié).
+- Réverbe à convolution : fournir une IR via `--ir` (bibliothèques d'IR de salles type OpenAIR,
+  licence à vérifier item par item) ; `--reverb` utilise une réverbe algorithmique.
+- Hébergement de VST3 commerciaux (RX/Ozone…) : non scriptable, **option Windows** hors‑scope (cf. `RESEARCH.md`).
+- De‑bleed Demucs : **expérimental** (Demucs est entraîné sur la pop, pas les cordes).
+- Le déclip est une interpolation cubique simple (secours, pas un restaurateur dédié).
+- Validé sur signaux synthétiques + un enregistrement réel — à confirmer à l'oreille (null‑test/A‑B fournis).
 
 ## Licences
 

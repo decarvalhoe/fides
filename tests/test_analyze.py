@@ -1,6 +1,6 @@
 import numpy as np
 
-from dlz import analyze as A
+from fides import analyze as A
 
 
 def _build(sr=48000, dur=2.0):

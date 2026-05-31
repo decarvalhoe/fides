@@ -1,7 +1,7 @@
 import numpy as np
 
-from dlz import process as PROC
-from dlz import verify as V
+from fides import process as PROC
+from fides import verify as V
 
 
 def test_loudness_linear_respects_true_peak():

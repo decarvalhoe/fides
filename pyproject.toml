@@ -3,7 +3,7 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dlz-mastering"
+name = "fides"
 version = "0.2.0"
 description = "Auto-mastering transparent pour cordes classiques (violon solo, petites formations)"
 readme = "README.md"
@@ -27,13 +27,13 @@ debleed = ["demucs", "torch"]
 dev = ["pytest"]
 
 [project.scripts]
-dlz = "dlz.cli:main"
+fides = "fides.cli:main"
 
 [tool.setuptools]
-packages = ["dlz"]
+packages = ["fides"]
 
 [tool.setuptools.package-data]
-dlz = ["profiles/*.json"]
+fides = ["profiles/*.json"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

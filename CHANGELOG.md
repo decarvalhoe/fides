@@ -1,6 +1,6 @@
 # Changelog
 
-Toutes les modifications notables de DLZ Mastering.
+Toutes les modifications notables de Fides.
 
 ## [0.2.0] — 2026-05-31
 ### Ajouté
@@ -14,7 +14,7 @@ Toutes les modifications notables de DLZ Mastering.
 - **Workflow** : mode batch (`--batch`) + normalisation album/anchor (EBU R128 s2),
   A/B aligné en loudness (`original_match.wav`), rapports HTML + MD + JSON.
 - **Ensembles** : blend multi-micros (`--blend`), de-bleed Demucs expérimental (`--debleed`).
-- **Packaging** : `pyproject.toml`, entry point `dlz`, CI GitHub Actions, profils embarqués.
+- **Packaging** : `pyproject.toml`, entry point `fides`, CI GitHub Actions, profils embarqués.
 - **Doc** : README, GUIDE (prise de son), ROADMAP, ISSUES, RESEARCH.
 
 ## [0.1.0] — 2026-05-31

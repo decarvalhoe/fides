@@ -2,7 +2,7 @@ import os
 
 import numpy as np
 
-from dlz import io_wav
+from fides import io_wav
 
 
 def _sine(n, sr=48000, f=440, amp=0.1):
