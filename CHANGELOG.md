@@ -2,6 +2,15 @@
 
 Toutes les modifications notables de Fides.
 
+## [0.2.2] — 2026-05-31
+### Ajouté
+- **Publication PyPI automatisée** : workflow `publish.yml` (GitHub Action,
+  trusted publishing OIDC — sans token) déclenché à chaque release publiée.
+- **Matrice CI** Python 3.10–3.12 ; `CONTRIBUTING.md` ; CLI `fides --version`.
+### Changé
+- `requires-python` ≥ 3.10 (imposé par numpy 2.2 / scipy 1.15) ; correction du nom
+  de programme CLI (`fides`) et version dynamique via `importlib.metadata`.
+
 ## [0.2.1] — 2026-05-31
 ### Ajouté
 - **Réverbe à convolution prête à l'emploi** : presets `hall/room/chamber` bundlés

@@ -1,17 +1,18 @@
-"""Interface en ligne de commande du pipeline DLZ."""
+"""Interface en ligne de commande du pipeline Fides."""
 from __future__ import annotations
 
 import argparse
 import json
 import sys
 
-from . import pipeline, reference
+from . import __version__, pipeline, reference
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
-        prog="dlz",
+        prog="fides",
         description="Auto-mastering transparent pour violon solo / petites formations classiques.")
+    ap.add_argument("--version", action="version", version=f"Fides {__version__}")
     ap.add_argument("input", nargs="?", help="fichier audio d'entrée (WAV/FLAC/AIFF/MP3/M4A…, multicanal OK)")
     ap.add_argument("-o", "--outdir", help="dossier de sortie")
     ap.add_argument("-p", "--profile", default="violin_solo", help="profil (défaut: violin_solo)")

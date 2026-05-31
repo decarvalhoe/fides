@@ -1,0 +1,29 @@
+name: Publish to PyPI
+
+# Publie le paquet sur PyPI quand une release GitHub est publiée (ou manuellement).
+# Utilise le "trusted publishing" (OIDC) : AUCUN token à stocker.
+# Pré-requis côté PyPI (une seule fois) : pypi.org -> Publishing -> Add a pending
+# publisher -> projet "fides-mastering", repo decarvalhoe/fides, workflow
+# "publish.yml", environment "pypi".
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write        # requis pour le trusted publishing (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build sdist + wheel
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

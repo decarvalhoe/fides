@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fides-mastering"
-version = "0.2.1"
+version = "0.2.2"
 description = "Auto-mastering transparent pour cordes classiques (violon solo, petites formations)"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "GPL-3.0-or-later" }
 authors = [{ name = "decarvalhoe", email = "devlab@realisons.com" }]
 keywords = ["mastering", "audio", "classical", "violin", "strings", "loudness", "ebu-r128"]
@@ -19,7 +19,6 @@ classifiers = [
   "Operating System :: Microsoft :: Windows",
   "Operating System :: MacOS",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",

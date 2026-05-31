@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/decarvalhoe/fides/actions/workflows/ci.yml/badge.svg)](https://github.com/decarvalhoe/fides/actions/workflows/ci.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-![Python ≥3.9](https://img.shields.io/badge/python-%E2%89%A53.9-blue)
+![Python ≥3.10](https://img.shields.io/badge/python-%E2%89%A53.10-blue)
 
 Auto‑mastering **transparent** pour **violon solo et petites formations classiques**
 (quatuor à cordes, musique de chambre). Le logiciel analyse l'enregistrement, décide
@@ -132,12 +132,18 @@ choisit **ch12**, copie propre 12 dB plus bas du même contenu. Override manuel 
 Nom de distribution **`fides-mastering`** (`fides` est déjà pris sur PyPI). Le paquet
 embarque les profils et les IR ; `twine check` passe.
 
+**Automatique (recommandé)** — *trusted publishing*, aucun token à stocker :
+1. Sur PyPI : *Publishing → Add a pending publisher* → projet `fides-mastering`,
+   repo `decarvalhoe/fides`, workflow `publish.yml`, environment `pypi`.
+2. Publier une **release GitHub** → l'action [`publish.yml`](.github/workflows/publish.yml)
+   construit et téléverse automatiquement.
+
+**Manuel** (avec token API PyPI) :
 ```bash
 pip install build twine
-python -m build                              # -> dist/fides_mastering-0.2.0.{tar.gz,whl}
-twine check dist/*
-twine upload --repository testpypi dist/*    # test d'abord (compte TestPyPI)
-twine upload dist/*                          # PyPI (token API requis)
+python -m build && twine check dist/*
+twine upload --repository testpypi dist/*    # test d'abord (TestPyPI)
+twine upload dist/*                          # PyPI
 ```
 
 ## Licences
