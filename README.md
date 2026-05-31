@@ -15,7 +15,7 @@ meilleures pratiques studio sans dénaturer le son original.*
 > **matchering** (matching sur référence, optionnel) · IR de vraies salles **OpenAIR**.
 > Runtime : **WSL2 / Ubuntu** (Linux‑first ; GPU NVIDIA dispo mais non requis).
 
-![Original vs master (REC_0001) — spectres superposés (transparent) + EQ doux plafonné](assets/spectrum.png)
+![Original vs master (REC_0001) — spectres superposés (transparent) + EQ doux plafonné](https://raw.githubusercontent.com/decarvalhoe/fides/main/assets/spectrum.png)
 
 ## Philosophie « ne pas dénaturer »
 
@@ -59,6 +59,7 @@ git clone https://github.com/decarvalhoe/fides.git
 cd fides
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[match]"        # + matchering ; ajoutez [debleed] pour Demucs (palier 2)
+# (après publication PyPI) : pip install fides-mastering
 ```
 
 Astuce WSL : `scripts/provision.sh` crée un venv et installe toute la pile sans sudo.
@@ -97,6 +98,8 @@ fides IN.wav -o OUT/ --bit-depth 32f             # master/stems en 32-bit float 
 
 **Interface graphique** (glisser‑déposer) : `fides-gui` — nécessite tkinter (Linux : `apt install python3-tk`) ; `pip install -e ".[gui]"` active le drag‑drop.
 
+![Interface graphique Fides (fides-gui)](https://raw.githubusercontent.com/decarvalhoe/fides/main/assets/gui.png)
+
 ### Sorties (`OUT/`)
 
 | Fichier | Contenu |
@@ -123,6 +126,19 @@ choisit **ch12**, copie propre 12 dB plus bas du même contenu. Override manuel 
 - De‑bleed Demucs : **expérimental** (Demucs est entraîné sur la pop, pas les cordes).
 - Le déclip est une interpolation cubique simple (secours, pas un restaurateur dédié).
 - Validé sur signaux synthétiques + un enregistrement réel — à confirmer à l'oreille (null‑test/A‑B fournis).
+
+## Publication PyPI (mainteneur)
+
+Nom de distribution **`fides-mastering`** (`fides` est déjà pris sur PyPI). Le paquet
+embarque les profils et les IR ; `twine check` passe.
+
+```bash
+pip install build twine
+python -m build                              # -> dist/fides_mastering-0.2.0.{tar.gz,whl}
+twine check dist/*
+twine upload --repository testpypi dist/*    # test d'abord (compte TestPyPI)
+twine upload dist/*                          # PyPI (token API requis)
+```
 
 ## Licences
 

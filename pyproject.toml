@@ -3,14 +3,29 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fides"
-version = "0.2.0"
+name = "fides-mastering"
+version = "0.2.1"
 description = "Auto-mastering transparent pour cordes classiques (violon solo, petites formations)"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "GPL-3.0-or-later" }
-authors = [{ name = "DLZ Creator" }]
-keywords = ["mastering", "audio", "classical", "violin", "loudness", "ebu-r128"]
+authors = [{ name = "decarvalhoe", email = "devlab@realisons.com" }]
+keywords = ["mastering", "audio", "classical", "violin", "strings", "loudness", "ebu-r128"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Sound/Audio :: Editors",
+  "Topic :: Multimedia :: Sound/Audio :: Analysis",
+]
 dependencies = [
   "numpy",
   "scipy",
@@ -25,7 +40,13 @@ dependencies = [
 match = ["matchering"]
 debleed = ["demucs", "torch", "torchaudio"]
 gui = ["tkinterdnd2"]
-dev = ["pytest"]
+dev = ["pytest", "build", "twine"]
+
+[project.urls]
+Homepage = "https://github.com/decarvalhoe/fides"
+Repository = "https://github.com/decarvalhoe/fides"
+Issues = "https://github.com/decarvalhoe/fides/issues"
+Changelog = "https://github.com/decarvalhoe/fides/blob/main/CHANGELOG.md"
 
 [project.scripts]
 fides = "fides.cli:main"
@@ -33,6 +54,7 @@ fides-gui = "fides.gui:main"
 
 [tool.setuptools]
 packages = ["fides"]
+include-package-data = true
 
 [tool.setuptools.package-data]
 fides = ["profiles/*.json", "ir/*.wav"]

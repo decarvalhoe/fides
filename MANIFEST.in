@@ -1,0 +1,5 @@
+include README.md LICENSE CHANGELOG.md ROADMAP.md ISSUES.md RESEARCH.md GUIDE.md
+recursive-include fides/profiles *.json
+recursive-include fides/ir *.wav
+graft assets
+global-exclude __pycache__ *.py[cod]

@@ -2,6 +2,15 @@
 
 Toutes les modifications notables de Fides.
 
+## [0.2.1] — 2026-05-31
+### Ajouté
+- **Réverbe à convolution prête à l'emploi** : presets `hall/room/chamber` bundlés
+  (`fides/space.py` + `fides/ir/*.wav`) ; `--ir hall|room|chamber` ou un chemin WAV.
+- **GUI** glisser‑déposer `fides-gui` (tkinter ; extra `gui`) + capture `assets/gui.png`.
+- **README** : badges (CI, licence, Python) + capture spectrale `assets/spectrum.png`.
+- **Packaging PyPI** : métadonnées (classifiers, URLs, auteur), `MANIFEST.in`,
+  distribution **`fides-mastering`** (profils + IR embarqués), `twine check` OK.
+
 ## [0.2.0] — 2026-05-31
 ### Ajouté
 - **Format plein** : `--full` (réassemble tous les canaux traités en un fichier
