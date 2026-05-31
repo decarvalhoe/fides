@@ -1,0 +1,14 @@
+{
+  "name": "violin_solo",
+  "description": "Violon solo — capture proche/medium. Restaure l'air, contrôle le bas-medium, dynamique préservée.",
+  "highpass_hz": 30,
+  "dehum": {"enable": "auto", "base_hz": 50, "harmonics": 3, "q": 30, "min_excess_db": 8.0, "max_cut_db": 12.0},
+  "denoise": {"enable": "auto", "floor_min_dbfs": -65.0, "floor_max_dbfs": -48.0, "min_dr_db": 20.0, "prop_decrease": 0.5},
+  "target_bands_pct": {"sub": 0.5, "low": 7.0, "low_mid": 20.0, "mid": 40.0, "high_mid": 18.0, "high": 10.0, "air": 4.5},
+  "air_shelf": {"freq_hz": 11000, "max_gain_db": 3.0, "deficit_pct": 1.5},
+  "warmth_shelf": {"freq_hz": 180, "max_gain_db": 1.5, "deficit_pct": 3.0},
+  "lowmid_tame": {"freq_hz": 300, "q": 1.0, "max_cut_db": 2.5, "excess_pct": 6.0},
+  "deharsh": {"freq_hz": 3200, "q": 1.2, "max_cut_db": 3.0, "excess_pct": 6.0},
+  "loudness": {"target_lufs": -16.0, "true_peak_dbtp": -1.0, "preset": "streaming-classical"},
+  "notes": "Cibles EBU R128 s2 (2023) : -16 LUFS pour streaming en préservant la dynamique ; option -23 (broadcast)."
+}

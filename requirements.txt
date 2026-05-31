@@ -1,0 +1,12 @@
+# DLZ mastering — pile open-source (palier 1, sans GPU)
+numpy
+scipy
+soundfile          # libsndfile : lecture multicanal 24-bit, fichiers tronqués
+pyloudnorm         # mesure LUFS BS.1770
+pedalboard         # coeur DSP + effets (Convolution, Reverb, Compressor, Limiter, filtres) + hôte VST3 optionnel  [GPLv3]
+noisereduce        # débruitage spectral CLASSIQUE (PAS de l'IA voix) — usage conservateur
+ffmpeg-normalize   # livraison loudness EBU R128 (deux passes)
+
+# Optionnel
+matchering         # matching sur référence (mg.process)  [GPL-3.0]
+# demucs           # séparation/dé-bleed optionnel (MIT) — à installer à la demande

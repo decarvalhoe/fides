@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dlz-mastering"
+version = "0.2.0"
+description = "Auto-mastering transparent pour cordes classiques (violon solo, petites formations)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "DLZ Creator" }]
+keywords = ["mastering", "audio", "classical", "violin", "loudness", "ebu-r128"]
+dependencies = [
+  "numpy",
+  "scipy",
+  "soundfile",
+  "pyloudnorm",
+  "pedalboard",
+  "noisereduce",
+  "ffmpeg-normalize",
+]
+
+[project.optional-dependencies]
+match = ["matchering"]
+debleed = ["demucs", "torch"]
+dev = ["pytest"]
+
+[project.scripts]
+dlz = "dlz.cli:main"
+
+[tool.setuptools]
+packages = ["dlz"]
+
+[tool.setuptools.package-data]
+dlz = ["profiles/*.json"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+
+# Sorties / données audio (hors repo)
+out/
+*.wav
+*.flac
+*.mp3
+*.m4a
+*.aif
+*.aiff
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
