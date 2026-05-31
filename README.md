@@ -59,6 +59,9 @@ git clone https://github.com/decarvalhoe/fides.git
 cd fides
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[match]"        # + matchering ; ajoutez [debleed] pour Demucs (palier 2)
+
+# OU sans cloner, depuis la release GitHub :
+pip install https://github.com/decarvalhoe/fides/releases/download/v0.2.2/fides_mastering-0.2.2-py3-none-any.whl
 # (après publication PyPI) : pip install fides-mastering
 ```
 
@@ -133,10 +136,11 @@ Nom de distribution **`fides-mastering`** (`fides` est déjà pris sur PyPI). Le
 embarque les profils et les IR ; `twine check` passe.
 
 **Automatique (recommandé)** — *trusted publishing*, aucun token à stocker :
-1. Sur PyPI : *Publishing → Add a pending publisher* → projet `fides-mastering`,
-   repo `decarvalhoe/fides`, workflow `publish.yml`, environment `pypi`.
-2. Publier une **release GitHub** → l'action [`publish.yml`](.github/workflows/publish.yml)
-   construit et téléverse automatiquement.
+1. Sur PyPI : *Publishing → Add a pending publisher* → **Project** `fides-mastering`,
+   **Owner** `decarvalhoe`, **Repository** `fides` (le dépôt, pas le projet),
+   **Workflow** `publish.yml`, **Environment** *(laisser vide)*.
+2. Publier une **release GitHub** (ou *Run workflow*) → l'action
+   [`publish.yml`](.github/workflows/publish.yml) construit et téléverse automatiquement.
 
 **Manuel** (avec token API PyPI) :
 ```bash
